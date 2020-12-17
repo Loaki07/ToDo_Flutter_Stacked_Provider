@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:todo_flutter_stacked_provider/ui/views/home/home_viewmodel.dart';
@@ -10,8 +12,58 @@ class HomeView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('To Do\'s'),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text('Add Todolist'),
+                  content: TextField(
+                    onChanged: (String value) {
+                      model.input = value;
+                    },
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: model.addToDo,
+                      child: Text('Add'),
+                    )
+                  ],
+                );
+              },
+            );
+          },
+          child: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
         body: Center(
-          child: Text(model.title),
+          child: ListView.builder(
+            itemCount: model.todos.length,
+            itemBuilder: (context, index) {
+              return Dismissible(
+                key: Key(model.todos[index]),
+                child: Card(
+                  elevation: 4,
+                  margin: EdgeInsets.all(8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: ListTile(
+                    title: Text(model.todos[index]),
+                    trailing: IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ),
       viewModelBuilder: () => HomeViewModel(),
