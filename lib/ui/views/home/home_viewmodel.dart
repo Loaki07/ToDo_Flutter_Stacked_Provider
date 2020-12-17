@@ -9,10 +9,16 @@ class HomeViewModel extends BaseViewModel {
   List<String> get todos => _todos;
 
   String input;
+  bool isChecked = false;
   final NavigationService _navigationService = locator<NavigationService>();
 
   void addToDo() {
     _todos.add(input);
+    notifyListeners();
+  }
+
+  void setCheckBoxToTrue(bool newValue) {
+    isChecked = newValue;
     notifyListeners();
   }
 }

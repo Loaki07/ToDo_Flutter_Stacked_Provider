@@ -53,11 +53,17 @@ class HomeView extends StatelessWidget {
                   ),
                   child: ListTile(
                     title: Text(model.todos[index]),
+                    leading: Checkbox(
+                      value: model.isChecked,
+                      activeColor: Colors.green,
+                      onChanged: model.setCheckBoxToTrue,
+                    ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
-                        color: Colors.black,
+                        color: Colors.red,
                       ),
+                      onPressed: null,
                     ),
                   ),
                 ),
