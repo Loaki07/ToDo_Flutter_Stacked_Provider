@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_flutter_stacked_provider/app/routes/router.gr.dart'
+    as AutoRouter;
 
 void main() {
   runApp(MyApp());
@@ -9,20 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: Text('Flutter Demo Home Page'),
+      title: 'To Do App',
+      initialRoute: AutoRouter.Routes.homeView,
+      onGenerateRoute: AutoRouter.Router().onGenerateRoute,
     );
   }
 }
