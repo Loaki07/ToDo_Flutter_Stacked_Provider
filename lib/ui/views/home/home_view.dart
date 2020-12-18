@@ -14,6 +14,9 @@ class HomeView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            print("From HomeView");
+            print(model.data);
+            print(model.todos);
             showDialog(
               context: context,
               builder: (context) {
@@ -44,7 +47,7 @@ class HomeView extends StatelessWidget {
             itemCount: model.todos.length,
             itemBuilder: (context, index) {
               return Dismissible(
-                key: Key(model.todos[index]),
+                key: Key(model.todos[index].todo.toString()),
                 child: Card(
                   elevation: 4,
                   margin: EdgeInsets.all(8),
@@ -52,7 +55,7 @@ class HomeView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: ListTile(
-                    title: Text(model.todos[index]),
+                    title: Text(model.todos[index].todo.toString()),
                     leading: Checkbox(
                       value: model.isChecked,
                       activeColor: Colors.green,

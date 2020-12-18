@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Item1",
+    "isChecked": false
+  },
+  {
+    "title": "Item2",
+    "isChecked": false
+  },
+  {
+    "title": "Item3",
+    "isChecked": true
+  }
+]
