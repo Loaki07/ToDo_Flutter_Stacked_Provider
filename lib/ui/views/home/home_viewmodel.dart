@@ -25,12 +25,16 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
   }
 
   void setCheckBoxToTrue(int index, bool newValue) {
-    _todos[index].isChecked = newValue;
     final item = todosBox.getAt(index);
+    item.isChecked = newValue;
     print(item);
-    todosBox.putAt(index, _todos[index]);
-    print(_todos[index].isChecked);
+    todosBox.putAt(index, item);
+    _todos[index].isChecked = item.isChecked;
     notifyListeners();
+  }
+
+  void deleteFromHive(int index) {
+    todosBox.deleteAt(index);
   }
 
   @override
@@ -71,4 +75,6 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
     _dialogService.showDialog(title: 'Error from DB', description: error);
     error ?? Error();
   }
+
+  deleteFromDb(index) {}
 }

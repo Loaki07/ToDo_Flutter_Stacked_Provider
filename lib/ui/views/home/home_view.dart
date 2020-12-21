@@ -63,7 +63,14 @@ class HomeView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: ListTile(
-                            title: Text(item.todo.toString()),
+                            title: Text(
+                              item.todo.toString(),
+                              style: item.isChecked
+                                  ? TextStyle(
+                                      decoration: TextDecoration.lineThrough,
+                                    )
+                                  : null,
+                            ),
                             leading: Checkbox(
                               value: item.isChecked,
                               activeColor: Colors.green,
@@ -75,7 +82,7 @@ class HomeView extends StatelessWidget {
                                 Icons.delete,
                                 color: Colors.red,
                               ),
-                              onPressed: null,
+                              onPressed: () => model.deleteFromHive(index),
                             ),
                           ),
                         ),
