@@ -34,8 +34,10 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
     notifyListeners();
   }
 
-  void deleteFromHive(int index) {
+  void deleteToDo(int index) {
     todosBox.deleteAt(index);
+    _todos.removeAt(index);
+    notifyListeners();
   }
 
   @override
@@ -80,6 +82,4 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
     _dialogService.showDialog(title: 'Error from DB', description: error);
     error ?? Error();
   }
-
-  deleteFromDb(index) {}
 }

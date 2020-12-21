@@ -82,7 +82,7 @@ class HomeView extends StatelessWidget {
                                 Icons.delete,
                                 color: Colors.red,
                               ),
-                              onPressed: () => model.deleteFromHive(index),
+                              onPressed: () => model.deleteToDo(index),
                             ),
                           ),
                         ),
