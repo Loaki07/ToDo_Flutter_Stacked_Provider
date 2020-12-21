@@ -26,16 +26,24 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
 
   void setCheckBoxToTrue(int index, bool newValue) {
     _todos[index].isChecked = newValue;
+    final item = todosBox.getAt(index);
+    print(item);
+    todosBox.putAt(index, _todos[index]);
+    print(_todos[index].isChecked);
     notifyListeners();
   }
 
   @override
   void onData(List<ToDoModel> data) {
     super.onData(data);
-    List<ToDoModel> dataFromHive = todosBox.values.toList();
-    print('data from hive $dataFromHive');
-    _todos.addAll(dataFromHive);
-    // _todos.addAll(todosBox.values);
+    _todos.addAll(data);
+    _todos.sort((a, b) {
+      if (!b.isChecked) {
+        return 1;
+      }
+      return -1;
+    });
+    print("sorted data $_todos");
     notifyListeners();
   }
 
@@ -46,12 +54,9 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
     if (stimulateError) {
       throw Exception("Error occoured during the API request");
     }
-    print('Getting all the data from hives ${todosBox.values}');
-    return [
-      ToDoModel(todo: 'Item1', isChecked: false),
-      ToDoModel(todo: 'Item2', isChecked: true),
-      ToDoModel(todo: 'Item3', isChecked: false),
-    ];
+    List<ToDoModel> dataFromHive = todosBox.values.toList();
+    print('data from hive $dataFromHive');
+    return dataFromHive;
   }
 
   @override

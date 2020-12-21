@@ -11,9 +11,10 @@ class ToDoModel extends HiveObject {
   ToDoModel({this.todo, this.isChecked});
 
   @override
-  String toString() {
-    return todo;
-  }
+  String toString() => 'todo: $todo, isChecked: $isChecked';
 
-  toJson() => {"todo": this.todo, "isChecked": this.isChecked};
+  toJson() => {
+        "todo": this.todo,
+        "isChecked": this.isChecked,
+      };
 }

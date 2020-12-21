@@ -53,15 +53,7 @@ class HomeView extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: model.todos.length,
                     itemBuilder: (context, index) {
-                      // final items = model.todos.map((item) {
-                      //   const tempList = <ToDoModel>[];
-                      //   if (!item.isChecked) {
-                      //     tempList.add(item);
-                      //   }
-                      //   return tempList;
-                      // }).toList();
                       final item = model.todos[index];
-                      // print(items);
                       return Dismissible(
                         key: Key(item.todo.toString()),
                         child: Card(
