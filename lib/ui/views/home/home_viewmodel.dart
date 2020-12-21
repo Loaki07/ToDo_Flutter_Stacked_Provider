@@ -30,6 +30,7 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
     print(item);
     todosBox.putAt(index, item);
     _todos[index].isChecked = item.isChecked;
+    _sortLocalToDoByIsChecked(_todos);
     notifyListeners();
   }
 
@@ -41,14 +42,18 @@ class HomeViewModel extends FutureViewModel<List<ToDoModel>> {
   void onData(List<ToDoModel> data) {
     super.onData(data);
     _todos.addAll(data);
-    _todos.sort((a, b) {
+    _sortLocalToDoByIsChecked(_todos);
+    print("sorted data $_todos");
+    notifyListeners();
+  }
+
+  void _sortLocalToDoByIsChecked(List<ToDoModel> data) {
+    data.sort((a, b) {
       if (!b.isChecked) {
         return 1;
       }
       return -1;
     });
-    print("sorted data $_todos");
-    notifyListeners();
   }
 
   Future<List<ToDoModel>> _getDataFromServer() async {

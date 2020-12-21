@@ -8,6 +8,7 @@ import 'package:todo_flutter_stacked_provider/app/routes/router.gr.dart'
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:todo_flutter_stacked_provider/model/todo_model.dart';
+import 'package:todo_flutter_stacked_provider/services/local/setup/setup_hive.dart';
 
 void main() async {
   // var appDocumentDirectory;
@@ -19,8 +20,7 @@ void main() async {
   //       await path_provider.getApplicationDocumentsDirectory();
   // }
   setupLocator();
-  Hive.initFlutter();
-  Hive.registerAdapter(ToDoModelAdapter());
+  await setUpHive();
   await Hive.openBox<ToDoModel>('todosTry2');
   runApp(MyApp());
 }
